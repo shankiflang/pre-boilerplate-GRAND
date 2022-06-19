@@ -1,0 +1,20 @@
+version: '3'
+services:
+  directus:
+    build:
+      context: ./Directus
+      dockerfile: ../.docker/.dev/Directus/Dockerfile
+    volumes:
+      - ./Directus/uploads:/directus/uploads
+      - ./Directus/database:/directus/database
+      - ./Directus/extensions:/directus/extensions
+      - ./Directus/snapshots:/directus/snapshots
+    environment:
+      KEY: '255d861b-5ea1-5996-9aa3-922530ec40b1'
+      SECRET: '6116487b-cda1-52c2-b5b5-c8022c45e263'
+
+  nginx:
+    image: nginx
+    ports:
+      - 80:80
+      - 443:443
