@@ -2,7 +2,12 @@
 Boilerplate for GraphQL React Apollo Node Directus (GRAND)
 
 
-# Create snapshot from docker 
+## Create snapshot from docker 
 ```bash
-docker exec pre-boilerplate-grand-directus-1 npx directus schema snapshot --yes ./snapshots/snapshot.yaml
+docker compose run directus npx directus schema snapshot --yes ./snapshots/snapshot.yaml
+```
+
+## Import snapshot to Directus
+```bash
+docker compose run directus npx directus schema snapshot apply ./snapshots/snapshot.yaml
 ```
