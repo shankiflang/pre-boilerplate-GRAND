@@ -4,17 +4,59 @@ services:
     build:
       context: ./Directus
       dockerfile: ../.docker/.dev/Directus/Dockerfile
+    networks:
+      - directus
+    depends_on:
+      - directusdb
     volumes:
       - ./Directus/uploads:/directus/uploads
-      - ./Directus/database:/directus/database
       - ./Directus/extensions:/directus/extensions
       - ./Directus/snapshots:/directus/snapshots
     environment:
       KEY: '255d861b-5ea1-5996-9aa3-922530ec40b1'
       SECRET: '6116487b-cda1-52c2-b5b5-c8022c45e263'
+      DB_CLIENT: 'pg'
+      DB_HOST: 'directusdb'
+      DB_PORT: '5432'
+      DB_DATABASE: 'directus'
+      DB_USER: 'directus'
+      DB_PASSWORD: 'directus'
+
+  directusdb:
+    container_name: database
+    image: postgis/postgis:13-master
+    volumes:
+      - directusdb:/var/lib/postgresql/data
+    networks:
+      - directus
+    environment:
+      POSTGRES_USER: 'directus'
+      POSTGRES_PASSWORD: 'directus'
+      POSTGRES_DB: 'directus'
+
+  react:
+    build:
+      context: ./React
+      dockerfile: ../.docker/.dev/React/Dockerfile
+    networks:
+      - directus
+    volumes:
+      - ./React:/react-docker
+    environment:
+      - WATCHPACK_POLLING=true
 
   nginx:
     image: nginx
+    volumes:
+      - ./.docker/.dev/Nginx/:/etc/nginx/conf.d/
+    networks:
+      - directus
     ports:
       - 80:80
       - 443:443
+
+networks:
+  directus:
+
+volumes:
+  directusdb:
