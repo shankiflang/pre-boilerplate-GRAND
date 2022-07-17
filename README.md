@@ -2,7 +2,6 @@
 Boilerplate for GraphQL React Apollo Node Directus (GRAND)
 
 ## Prerequisites
-
 - Docker (with docker-compose)
 - Mkcert up and running (https://github.com/FiloSottile/mkcert)
 
@@ -44,4 +43,3 @@ You'll need to change the CA folder. Cause Windows need the CA to trust your fil
 Run on PowerShell:
 ```powershell
 setx CAROOT "$(mkcert -CAROOT)"; setx WSLENV "CAROOT/up:$Env:WSLENV"
-```
