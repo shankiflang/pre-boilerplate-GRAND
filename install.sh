@@ -12,7 +12,7 @@ if ! type "docker" > /dev/null; then
     exit 1
 fi
 
-# Check if mkcert exists
+# Check if docker-compose exists
 if ! type "docker-compose" > /dev/null; then
     echo "Please install docker-compose"
     exit 1

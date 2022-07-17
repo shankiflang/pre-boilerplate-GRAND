@@ -3,7 +3,7 @@ Boilerplate for GraphQL React Apollo Node Directus (GRAND)
 
 ## Prerequisites
 - Docker (with docker-compose)
-- Mkcert up and running (https://github.com/FiloSottile/mkcert)
+- Mkcert (https://github.com/FiloSottile/mkcert)
 
 ## How to install
 Run the install script:
