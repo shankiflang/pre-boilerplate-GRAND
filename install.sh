@@ -15,14 +15,14 @@ else
     exit 1   
 fi
 
-    if [ ! -f .docker/.dev/Nginx/SSL/Directus/cert.pem ] || [ ! -f .docker/.dev/Nginx/SSL/Directus/key.pem ] 
-    then
-        "$mkcert" -key-file .docker/.dev/Nginx/SSL/Directus/key.pem -cert-file .docker/.dev/Nginx/SSL/Directus/cert.pem admin.localhost
-    fi
-    if [ ! -f .docker/.dev/Nginx/SSL/React/cert.pem ] || [ ! -f .docker/.dev/Nginx/SSL/React/key.pem ] 
-    then
-        "$mkcert" -key-file .docker/.dev/Nginx/SSL/React/key.pem -cert-file .docker/.dev/Nginx/SSL/React/cert.pem localhost
-    fi
+if [ ! -f .docker/.dev/Nginx/SSL/Directus/cert.pem ] || [ ! -f .docker/.dev/Nginx/SSL/Directus/key.pem ] 
+then
+    "$mkcert" -key-file .docker/.dev/Nginx/SSL/Directus/key.pem -cert-file .docker/.dev/Nginx/SSL/Directus/cert.pem admin.localhost
+fi
+if [ ! -f .docker/.dev/Nginx/SSL/React/cert.pem ] || [ ! -f .docker/.dev/Nginx/SSL/React/key.pem ] 
+then
+    "$mkcert" -key-file .docker/.dev/Nginx/SSL/React/key.pem -cert-file .docker/.dev/Nginx/SSL/React/cert.pem localhost
+fi
 
 # Check if docker exists
 if ! type "docker" > /dev/null; 
