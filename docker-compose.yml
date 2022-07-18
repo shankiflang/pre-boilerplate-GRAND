@@ -3,7 +3,7 @@ services:
   directus:
     build:
       context: ./Directus
-      dockerfile: ./.docker/.dev/Directus/Dockerfile
+      dockerfile: ../.docker/.dev/Directus/Dockerfile
     networks:
       - GRAND_NETWORK
     depends_on:
