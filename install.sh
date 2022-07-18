@@ -6,9 +6,13 @@ then
     echo "Please install mkcert https://github.com/FiloSottile/mkcert"
     exit 1
 else 
-    if [ ! -f .docker/.dev/Nginx/SSL/cert.pem ] || [ ! -f .docker/.dev/Nginx/SSL/key.pem ] 
+    if [ ! -f .docker/.dev/Nginx/SSL/Directus/cert.pem ] || [ ! -f .docker/.dev/Nginx/SSL/Directus/key.pem ] 
     then
-        mkcert -key-file .docker/.dev/Nginx/SSL/key.pem -cert-file .docker/.dev/Nginx/SSL/cert.pem localhost admin.localhost
+        mkcert -key-file .docker/.dev/Nginx/SSL/Directus/key.pem -cert-file .docker/.dev/Nginx/SSL/Directus/cert.pem admin.localhost
+    fi
+    if [ ! -f .docker/.dev/Nginx/SSL/React/cert.pem ] || [ ! -f .docker/.dev/Nginx/SSL/React/key.pem ] 
+    then
+        mkcert -key-file .docker/.dev/Nginx/SSL/React/key.pem -cert-file .docker/.dev/Nginx/SSL/React/cert.pem localhost
     fi
 fi
 
