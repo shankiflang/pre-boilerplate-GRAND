@@ -40,7 +40,7 @@ services:
     networks:
       - GRAND_NETWORK
     volumes:
-      - ./React:/react-docker
+      - ./React:/app
     environment:
       - WATCHPACK_POLLING=true
 
