@@ -1,20 +1,28 @@
 #!/bin/sh
 
 # Check if mkcert exists and create the SSL files
-if ! type "mkcert" > /dev/null; 
+if command -v mkcert > /dev/null; 
 then
-    echo "Please install mkcert https://github.com/FiloSottile/mkcert"
-    exit 1
+    mkcert="mkcert"
+elif command -v ./mkcert > /dev/null;
+then 
+    mkcert="./mkcert"
+elif command -v ./mkcert.exe > /dev/null; 
+then
+    mkcert="./mkcert.exe"
 else 
+    echo "Please install mkcert https://github.com/FiloSottile/mkcert"
+    exit 1   
+fi
+
     if [ ! -f .docker/.dev/Nginx/SSL/Directus/cert.pem ] || [ ! -f .docker/.dev/Nginx/SSL/Directus/key.pem ] 
     then
-        mkcert -key-file .docker/.dev/Nginx/SSL/Directus/key.pem -cert-file .docker/.dev/Nginx/SSL/Directus/cert.pem admin.localhost
+        "$mkcert" -key-file .docker/.dev/Nginx/SSL/Directus/key.pem -cert-file .docker/.dev/Nginx/SSL/Directus/cert.pem admin.localhost
     fi
     if [ ! -f .docker/.dev/Nginx/SSL/React/cert.pem ] || [ ! -f .docker/.dev/Nginx/SSL/React/key.pem ] 
     then
-        mkcert -key-file .docker/.dev/Nginx/SSL/React/key.pem -cert-file .docker/.dev/Nginx/SSL/React/cert.pem localhost
+        "$mkcert" -key-file .docker/.dev/Nginx/SSL/React/key.pem -cert-file .docker/.dev/Nginx/SSL/React/cert.pem localhost
     fi
-fi
 
 # Check if docker exists
 if ! type "docker" > /dev/null; 
@@ -36,8 +44,8 @@ docker-compose run --rm react yarn
 # Start the database and seed the database for Directus
 docker-compose run --rm directus npx directus bootstrap
 
-#Import the snapshot storted in the `snapshot.json` file
-docker-compose run --rm directus npx directus schema apply --yes /directus/snapshots/snapshot.yaml
+# Import the snapshot storted in the `snapshot.json` file
+docker-compose run --rm directus npx directus schema apply --yes //directus//snapshots//snapshot.yaml
 
 # Docker up everything
 docker compose up -d --build --force-recreate
