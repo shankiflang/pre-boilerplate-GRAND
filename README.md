@@ -16,8 +16,6 @@ Here is the steps that the install script will take:
 2. Install npm packages
 3. Start the database and seed the database for Directus
 4. Import the snapshot storted in the `snapshot.json` file
-5. Create an "admin" role
-6. Create an "admin" user
 7. Docker up everything
 
 ## Commands

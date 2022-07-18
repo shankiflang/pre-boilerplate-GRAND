@@ -39,11 +39,5 @@ docker-compose run --rm directus npx directus bootstrap
 #Import the snapshot storted in the `snapshot.json` file
 docker-compose run --rm directus npx directus schema apply --yes /directus/snapshots/snapshot.yaml
 
-# Create an "admin" role
-role_id=`echo ${docker-compose run --rm directus npx directus roles create --role admin --admin true}`
-
-# Create an "admin" user
-docker-compose run --rm directus npx directus users create --email admin@admin.com --password admin --role $role_id
-
 # Docker up everything
 docker compose up -d --build --force-recreate

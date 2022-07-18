@@ -21,6 +21,8 @@ services:
       DB_DATABASE: 'directus'
       DB_USER: 'directus'
       DB_PASSWORD: 'directus'
+      ADMIN_EMAIL: 'admin@example.com'
+      ADMIN_PASSWORD: 'admin'
 
   directusdb:
     image: postgis/postgis:13-master
