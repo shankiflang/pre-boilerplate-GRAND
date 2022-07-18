@@ -1,6 +1,6 @@
 FROM node:16-alpine
 
-WORKDIR /react-docker
+WORKDIR /app
 COPY ./package*.json ./
 RUN yarn
 

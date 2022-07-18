@@ -38,7 +38,7 @@ docker-compose run --rm react <command>
 
 
 ### For mkcert in WSL2
-You'll need to change the CA folder. Cause Windows need the CA to trust your files
+You'll need to change the CA folder. Cause Windows need the CA to trust your files.
 
 Run on PowerShell:
 ```powershell
