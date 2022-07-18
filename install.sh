@@ -1,19 +1,27 @@
 #!/bin/sh
 
-# Check if mkcert exists
-if ! type "mkcert" > /dev/null; then
+# Check if mkcert exists and create the SSL files
+if ! type "mkcert" > /dev/null; 
+then
     echo "Please install mkcert https://github.com/FiloSottile/mkcert"
     exit 1
+else 
+    if [ ! -f .docker/.dev/Nginx/SSL/cert.pem ] || [ ! -f .docker/.dev/Nginx/SSL/key.pem ] 
+    then
+        mkcert -key-file .docker/.dev/Nginx/SSL/key.pem -cert-file .docker/.dev/Nginx/SSL/cert.pem localhost admin.localhost
+    fi
 fi
 
 # Check if docker exists
-if ! type "docker" > /dev/null; then
+if ! type "docker" > /dev/null; 
+then
     echo "Please install docker"
     exit 1
 fi
 
 # Check if docker-compose exists
-if ! type "docker-compose" > /dev/null; then
+if ! type "docker-compose" > /dev/null; 
+then
     echo "Please install docker-compose"
     exit 1
 fi
@@ -32,9 +40,6 @@ role_id=`echo ${docker-compose run --rm directus npx directus roles create --rol
 
 # Create an "admin" user
 docker-compose run --rm directus npx directus users create --email admin@admin.com --password admin --role $role_id
-
-# Create the SSL files
-mkcert -key-file .docker/.dev/Nginx/SSL/key.pem -cert-file .docker/.dev/Nginx/SSL/cert.pem localhost *.localhost
 
 # Docker up everything
 docker compose up -d --build --force-recreate
